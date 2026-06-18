@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: 928974129633.dkr.ecr.ap-south-1.amazonaws.com/payment-service
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 5000
