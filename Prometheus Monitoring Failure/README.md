@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚨 Prometheus Monitoring Failure – Incident Response & Resolution 📊
+# 📊 Prometheus Monitoring Failure – Incident Response & Resolution 
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-K8s-blue)
 ![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-orange)
