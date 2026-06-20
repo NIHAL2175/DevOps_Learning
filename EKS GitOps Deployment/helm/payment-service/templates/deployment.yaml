@@ -1,5 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: payment-service
 
@@ -16,10 +17,25 @@ spec:
         app: payment-service
 
     spec:
+      serviceAccountName: payment-service-sa
+
       containers:
         - name: payment-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: payment-secret
+                  key: DB_USER
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: payment-secret
+                  key: DB_PASSWORD
 
           resources:
 {{ toYaml .Values.resources | nindent 12 }}
