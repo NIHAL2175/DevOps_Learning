@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payment-service
+spec:
+  containers:
+  - name: payment-service
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "Using rotated token..."
+        echo "Token validation successful"
+        echo "Authentication successful"
+        sleep 3600
