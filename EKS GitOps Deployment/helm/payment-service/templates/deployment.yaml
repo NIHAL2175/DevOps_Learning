@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: payment-service
+
 spec:
   replicas: {{ .Values.replicaCount }}
 
@@ -19,8 +20,9 @@ spec:
         - name: payment-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           resources:
-      {{ toYaml .Values.resources | indent 6 }}
+{{ toYaml .Values.resources | nindent 12 }}
 
           ports:
             - containerPort: 5000
