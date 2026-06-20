@@ -1,11 +1,31 @@
-Investigation Commands
+# Investigation Report
 
-kubectl get servicemonitor payment-service -o yaml
+## Incident
+Prometheus Monitoring Failure
 
-kubectl get svc payment-service -o yaml
+## Symptoms
+- Grafana showed No Data
+- Prometheus target status showed DOWN
+- Prometheus logs reported context deadline exceeded
 
-kubectl get endpoints payment-service
+## Investigation
 
-kubectl port-forward svc/prometheus-k8s 9090
+Checked ServiceMonitor configuration:
 
-Check : http://localhost:9090/targets
+port: metrics
+
+Checked Service configuration:
+
+name: prometheus
+
+A mismatch was identified between the ServiceMonitor endpoint port and the Service port name.
+
+## Root Cause
+
+Prometheus discovers service endpoints using port names. The ServiceMonitor expected a port named metrics, but the Service exposed a port named prometheus.
+
+Because of this mismatch, Prometheus could not discover the endpoint.
+
+## Resolution
+
+Updated the Service port name from prometheus to metrics using service-fixed.yaml.
