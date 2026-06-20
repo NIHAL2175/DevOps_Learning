@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payment-service
+  labels:
+    app: payment-service
+spec:
+  containers:
+  - name: payment-service
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "payment-service started"
+        while true; do
+          echo "Processing payment..."
+          sleep 1
+        done

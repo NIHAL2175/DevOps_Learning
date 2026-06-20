@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: checkout-service
+  labels:
+    app: checkout-service
+spec:
+  containers:
+  - name: checkout-service
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "checkout-service started"
+        while true; do
+          echo "Processing checkout request..."
+          sleep 1
+        done
