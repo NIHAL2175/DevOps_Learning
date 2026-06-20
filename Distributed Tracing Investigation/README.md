@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔍 Distributed Tracing Investigation – Kubernetes Observability Incident
+# 🔍 Distributed Tracing Investigation – Kubernetes Observance
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-K8s-blueviolet)
 ![Grafana](https://img.shields.io/badge/Grafana-Observability-orange)
