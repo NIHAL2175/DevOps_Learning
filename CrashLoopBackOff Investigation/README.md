@@ -7,7 +7,6 @@
 ![DevOps](https://img.shields.io/badge/DevOps-Incident%20Response-green)
 ![SRE](https://img.shields.io/badge/SRE-Root%20Cause%20Analysis-orange)
 
-### Production Incident Investigation – Kubernetes CrashLoopBackOff
 
 ![Architecture Diagram](Architecture/arch.png)
 
