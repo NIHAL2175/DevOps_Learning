@@ -1,139 +1,301 @@
-Prometheus Monitoring Failure
+<div align="center">
 
-## Incident
+# 🚨 Prometheus Monitoring Failure – Incident Response & Resolution 📊
 
-Metrics disappeared from Grafana.
+![Kubernetes](https://img.shields.io/badge/Kubernetes-K8s-blue)
+![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-orange)
+![Grafana](https://img.shields.io/badge/Grafana-Visualization-yellow)
+![DevOps](https://img.shields.io/badge/DevOps-Troubleshooting-green)
+![Incident](https://img.shields.io/badge/Incident-Management-red)
 
-### Symptoms
+![Architecture Diagram](Architecture/arch.png)
 
-Grafana:
+</div>
+
+---
+
+# 📂 Project Structure
+
+| File | Description |
+|--------|-------------|
+| 📄 README.md | Project documentation |
+| 📄 service.yaml | Broken Service configuration |
+| 📄 servicemonitor.yaml | ServiceMonitor configuration |
+| 📄 service-fixed.yaml | Fixed Service configuration |
+| 📄 investigation.md | Root cause investigation report |
+| 📄 validation.md | Validation report |
+| 📄 evidence.md | Evidence collected before and after fix |
+| 🖼️ Architecture/arch.png | Architecture and resolution workflow |
+
+---
+
+# 🧠 Project Overview
+
+This project simulates a real-world Kubernetes monitoring incident where application metrics suddenly disappear from Grafana dashboards.
+
+The monitoring stack consists of:
+
+- ☸️ Kubernetes
+- 🔥 Prometheus
+- 📊 Grafana
+- 🔎 ServiceMonitor
+
+The incident occurs because Prometheus is unable to discover the payment-service metrics endpoint due to a configuration mismatch between the Kubernetes Service and the ServiceMonitor.
+
+The objective of this project is to:
+
+- Investigate the monitoring outage
+- Identify the root cause
+- Apply the corrective fix
+- Validate the recovery
+- Document the incident response process
+
+---
+
+# 🚨 Incident Scenario
+
+## Symptoms Observed
+
 ```text
-No Data
-```
+Grafana: No Data
 
-Prometheus Targets:
-```text
+Prometheus Target:
 payment-service DOWN
-```
 
 Prometheus Logs:
-```text
 context deadline exceeded
 ```
 
-ServiceMonitor:
-```yaml
-port: metrics
-```
+### Impact
 
-Service:
-```yaml
-port:
-  name: prometheus
+- Metrics collection stopped
+- Dashboards displayed no data
+- Service observability was lost
+- Monitoring alerts could not function correctly
+
+---
+
+# 🏗️ Architecture at a Glance
+
+```text
+Payment Service
+       │
+       ▼
+ Kubernetes Service
+       │
+       ▼
+ ServiceMonitor
+       │
+       ▼
+ Prometheus
+       │
+       ▼
+ Grafana
 ```
 
 ---
 
-## Investigation
+# ⚠️ Root Cause Investigation
+
+## ServiceMonitor Configuration
+
+```yaml
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+spec:
+  endpoints:
+    - port: metrics
+```
+
+## Service Configuration (Broken)
+
+```yaml
+apiVersion: v1
+kind: Service
+spec:
+  ports:
+    - name: prometheus
+```
+
+### Root Cause
 
 The ServiceMonitor was configured to scrape a port named:
 
-```yaml
-port: metrics
+```text
+metrics
 ```
 
-However, the Kubernetes Service exposed the metrics endpoint using:
+while the Service exposed a port named:
 
-```yaml
-name: prometheus
+```text
+prometheus
 ```
 
-Prometheus uses the ServiceMonitor to discover targets. Since the port names did not match, Prometheus could not find the correct endpoint.
+Since Prometheus discovers endpoints using port names, the mismatch prevented target discovery.
 
 ---
 
-## Root Cause
+# 🔄 Failure Workflow
 
-Port name mismatch between ServiceMonitor and Service.
-
-Expected:
-
-```yaml
-port: metrics
+```text
+ServiceMonitor
+(port: metrics)
+        │
+        ▼
+Service
+(name: prometheus)
+        │
+        ▼
+Port Name Mismatch
+        │
+        ▼
+Prometheus Target DOWN
+        │
+        ▼
+Grafana No Data
 ```
-
-Found:
-
-```yaml
-name: prometheus
-```
-
-Because of this mismatch, Prometheus could not scrape metrics and marked the target as DOWN.
 
 ---
 
-## Impact
+# 🛠️ Resolution
 
-- Prometheus target became DOWN
-- Metrics collection stopped
-- Grafana dashboards showed No Data
+The issue was resolved using:
+
+```text
+service-fixed.yaml
+```
+
+### Updated Service Configuration
+
+```yaml
+apiVersion: v1
+kind: Service
+spec:
+  ports:
+    - name: metrics
+```
+
+### Result
+
+The Service and ServiceMonitor now use the same port name:
+
+```text
+metrics
+```
+
+allowing Prometheus to discover the endpoint successfully.
 
 ---
 
-## Fix
+# ✅ Validation
 
-### Option 1
+### ServiceMonitor
 
-Update Service port name:
-
-```yaml
-ports:
-- name: metrics
+```text
+Port: metrics
 ```
 
-### Option 2
+### Service
 
-Update ServiceMonitor:
-
-```yaml
-endpoints:
-- port: prometheus
+```text
+Port: metrics
 ```
 
-Ensure both configurations reference the same port name.
+### Validation Outcome
+
+- ✅ Port names matched successfully
+- ✅ Prometheus target discovery restored
+- ✅ Monitoring configuration corrected
+- ✅ Metrics available again
 
 ---
+
+# 📊 Before vs After
+
+| Component | Before Fix | After Fix |
+|------------|------------|------------|
+| Service Port Name | prometheus | metrics |
+| ServiceMonitor Port | metrics | metrics |
+| Prometheus Target | DOWN | UP |
+| Grafana Dashboard | No Data | Metrics Available |
+| Monitoring Status | Failed | Restored |
+
+---
+
+# 🧪 Commands Used
+
+## Deploy Broken Configuration
+
+```bash
+kubectl apply -f service.yaml
+kubectl apply -f servicemonitor.yaml
+```
+
+## Investigation
+
+```bash
+kubectl describe servicemonitor payment-service
+kubectl describe svc payment-service
+```
+
+## Apply Fix
+
+```bash
+kubectl apply -f service-fixed.yaml
+```
 
 ## Validation
 
-Verify Prometheus targets:
-
 ```bash
-kubectl port-forward svc/prometheus-k8s 9090
+kubectl get servicemonitor
+kubectl get svc payment-service
 ```
-
-Open:
-
-```text
-http://localhost:9090/targets
-```
-
-Expected:
-
-```text
-payment-service UP
-```
-
-Verify metrics endpoint:
-
-```bash
-curl http://payment-service:8080/metrics
-```
-
-Metrics should be visible again in Grafana.
 
 ---
 
-## Conclusion
+# 📈 Incident Resolution Workflow
 
-The monitoring outage was caused by a configuration mismatch between the ServiceMonitor and the Kubernetes Service. Aligning the port names restored Prometheus scraping and Grafana metrics.
+```text
+Incident Reported
+        │
+        ▼
+Investigation
+        │
+        ▼
+Configuration Review
+        │
+        ▼
+Root Cause Identification
+        │
+        ▼
+Apply Fix
+        │
+        ▼
+Validation
+        │
+        ▼
+Monitoring Restored
+```
+
+---
+
+# 🎯 Key Learnings
+
+- Understanding Prometheus Service Discovery
+- Troubleshooting ServiceMonitor issues
+- Kubernetes Service configuration validation
+- Root Cause Analysis (RCA)
+- Monitoring incident resolution
+- Production troubleshooting workflow
+
+---
+
+<div align="center">
+
+# 👨‍💻 Author
+
+**NIHAL N** — DevOps & Cloud Engineer
+
+⭐ If this project helped you understand Kubernetes monitoring troubleshooting, consider giving it a star.
+
+</div>
