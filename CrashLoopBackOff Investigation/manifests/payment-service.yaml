@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: payment-service
+  labels:
+    app: payment-service
+spec:
+  containers:
+  - name: payment-service
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "Connecting to PostgreSQL..."
+        echo "Database connection successful"
+        sleep 3600
