@@ -1,0 +1,19 @@
+# Check disk usage
+
+du -sh /var/log/containers/*
+
+# Remove old container logs
+
+find /var/log/containers -type f -name "*.log" -delete
+
+# Restart kubelet
+
+systemctl restart kubelet
+
+# Verify node status
+
+kubectl get nodes
+
+# Verify node conditions
+
+kubectl describe node docker-desktop
