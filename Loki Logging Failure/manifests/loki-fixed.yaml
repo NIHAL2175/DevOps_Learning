@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: loki
+spec:
+  containers:
+  - name: loki
+    image: busybox
+    command:
+    - sh
+    - -c
+    - |
+      echo "Starting Loki..."
+      sleep 5
+      echo "authentication successful"
+      echo "logs accepted"
+      sleep 3600

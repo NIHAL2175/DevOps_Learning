@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alloy
+spec:
+  containers:
+  - name: alloy
+    image: busybox
+    command:
+    - sh
+    - -c
+    - |
+      echo "Starting Alloy..."
+      sleep 5
+      echo "failed to push logs"
+      echo "HTTP 403"
+      sleep 3600

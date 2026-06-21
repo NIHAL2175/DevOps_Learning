@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alloy
+spec:
+  containers:
+  - name: alloy
+    image: busybox
+    command:
+    - sh
+    - -c
+    - |
+      echo "Starting Alloy..."
+      sleep 5
+      echo "logs forwarded successfully"
+      echo "push successful"
+      sleep 3600
