@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-app
+spec:
+  containers:
+  - name: customer-app
+    image: busybox
+    command:
+    - sh
+    - -c
+    - |
+      echo "FATAL:"
+      echo "Database password not found"
+      echo "Environment Variable DB_PASSWORD missing"
+      exit 1

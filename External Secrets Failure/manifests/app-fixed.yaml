@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-app
+spec:
+  containers:
+  - name: customer-app
+    image: busybox
+    env:
+    - name: DB_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: db-secret
+          key: DB_PASSWORD
+    command:
+    - sh
+    - -c
+    - |
+      echo "Database password loaded successfully"
+      echo "Application started"
+      sleep 3600
