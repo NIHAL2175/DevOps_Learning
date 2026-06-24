@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: customer-app-sa
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-app
+spec:
+  serviceAccountName: customer-app-sa
+  containers:
+  - name: customer-app
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "2026-05-10T08:12:13Z ERROR"
+        echo "botocore.exceptions.ClientError:"
+        echo "An error occurred (AccessDeniedException)"
+        echo "when calling the GetItem operation:"
+        echo "User: arn:aws:sts::123456789012:assumed-role/eks-nodegroup-role"
+        echo "is not authorized to perform:"
+        echo "dynamodb:GetItem"
+        echo "on resource:"
+        echo "arn:aws:dynamodb:ap-south-1:123456789012:table/customer-data"
+        sleep 3600
