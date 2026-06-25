@@ -1,0 +1,42 @@
+$ kubectl get hpa
+
+NAME                  REFERENCE                    TARGETS   MINPODS   MAXPODS   REPLICAS
+payment-service-hpa   Deployment/payment-service   48%/50%   5         15        15
+
+--------------------------------------------------
+
+$ kubectl get nodes
+
+ip-10-0-1-25     Ready
+ip-10-0-2-41     Ready
+ip-10-0-3-18     Ready
+ip-10-0-4-62     Ready
+
+--------------------------------------------------
+
+$ kubectl get pods
+
+payment-service-1      Running
+payment-service-2      Running
+payment-service-3      Running
+payment-service-4      Running
+payment-service-5      Running
+payment-service-6      Running
+payment-service-7      Running
+payment-service-8      Running
+payment-service-9      Running
+payment-service-10     Running
+payment-service-11     Running
+payment-service-12     Running
+payment-service-13     Running
+payment-service-14     Running
+payment-service-15     Running
+
+--------------------------------------------------
+
+Cluster Autoscaler
+
+Successfully discovered node group
+Scaling node group from 3 to 4 nodes
+
+Scale-up completed successfully.

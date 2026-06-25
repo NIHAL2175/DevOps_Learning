@@ -1,0 +1,39 @@
+$ kubectl get hpa
+
+NAME                  REFERENCE                    TARGETS    MINPODS   MAXPODS   REPLICAS
+payment-service-hpa   Deployment/payment-service   95%/50%    5         15        5
+
+Desired Replicas: 15
+Current Replicas: 5
+
+--------------------------------------------------
+
+$ kubectl get pods
+
+payment-service-1     Running
+payment-service-2     Running
+payment-service-3     Running
+payment-service-4     Running
+payment-service-5     Running
+
+payment-service-6     Pending
+payment-service-7     Pending
+payment-service-8     Pending
+payment-service-9     Pending
+payment-service-10    Pending
+
+--------------------------------------------------
+
+$ kubectl describe pod payment-service-6
+
+Warning  FailedScheduling
+
+0/3 nodes available:
+
+Insufficient cpu
+
+--------------------------------------------------
+
+$ kubectl logs cluster-autoscaler
+
+No node group config found

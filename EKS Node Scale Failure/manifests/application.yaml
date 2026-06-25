@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+    spec:
+      containers:
+      - name: payment-service
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          echo "Payment Service Started"
+          sleep 3600
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "128Mi"
