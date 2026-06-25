@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚨 ALB Ingress Failure Investigation & Resolution
+# 🚨 ALB Ingress Failure - Investigation & Resolution
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Ingress-blue)
 ![AWS](https://img.shields.io/badge/AWS-ALB-orange)
@@ -281,8 +281,10 @@ Validation Results
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nihal%20N-blue?logo=linkedin)](https://www.linkedin.com/in/nihal-n-cse/)
 
----
+
 
 ⭐ **If you found this investigation useful, consider giving the repository a Star!**
 
 </div>
+
+---
