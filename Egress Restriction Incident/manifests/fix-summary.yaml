@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: egress-fix-summary
+data:
+  security-group: |
+    Added outbound HTTPS (TCP 443) rule.
+  route-table: |
+    Added default route (0.0.0.0/0) to NAT Gateway.
+  vpc-endpoint: |
+    Created Gateway VPC Endpoint for DynamoDB.
+  validation: |
+    Application can successfully communicate with DynamoDB.

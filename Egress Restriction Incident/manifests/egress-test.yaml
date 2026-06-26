@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: egress-test
+spec:
+  restartPolicy: Never
+  containers:
+  - name: app
+    image: curlimages/curl
+    command:
+      - sh
+      - -c
+      - |
+        echo "Starting application..."
+        echo "Trying to access DynamoDB..."
+        curl --connect-timeout 5 https://dynamodb.ap-south-1.amazonaws.com
+        echo "Connection timeout"
+        sleep 3600

@@ -1,0 +1,31 @@
+Security Group Investigation
+----------------------------
+Outbound Rule:
+No HTTPS (443) egress rule to AWS services.
+
+Result:
+FAILED
+
+
+Network Policy Investigation
+----------------------------
+No Kubernetes Network Policies found.
+
+Result:
+PASSED
+
+
+Route Table Investigation
+-------------------------
+Private subnet has no route to NAT Gateway.
+
+Result:
+FAILED
+
+
+VPC Endpoint Investigation
+--------------------------
+No Gateway Endpoint configured for DynamoDB.
+
+Result:
+FAILED
