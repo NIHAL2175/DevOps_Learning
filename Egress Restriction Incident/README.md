@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Egress Restriction Incident Investigation – Kubernetes & AWS Networking
+# 🚀 Egress Restriction Incident - Investigation & Resolution 
 
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-K8s-blue)
 ![AWS](https://img.shields.io/badge/AWS-DynamoDB-orange)
@@ -657,32 +657,6 @@ During this exercise, the following concepts were reinforced:
 
 ---
 
-# 📂 Repository Structure
-
-```
-Egress Restriction Incident/
-│
-├── architecture/
-│      architecture.png
-│
-├── evidence/
-│      evidence.md
-│      aws-network-findings.txt
-│
-├── investigation/
-│      investigation.md
-│      root-cause.md
-│
-├── manifests/
-│      egress-test.yaml
-│      fix-summary.yaml
-│
-├── README.md
-└── validation.md
-```
-
----
-
 # 📚 References
 
 * Kubernetes Documentation
@@ -702,7 +676,7 @@ Egress Restriction Incident/
 
 **DevOps | Cloud | Kubernetes | AWS | DevSecOps**
 
-⭐ **If this project helped you understand Kubernetes networking and AWS connectivity troubleshooting, consider giving the repository a Star!**
+⭐ **If this project helped you understand Kubernetes networking and troubleshooting, consider giving the repository a Star!**
 
 </div>
 
