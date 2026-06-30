@@ -1,0 +1,41 @@
+replicaCount: 3
+
+image:
+  repository: nginx
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+configMap:
+  enabled: true
+  data:
+    APP_NAME: "reusable-app"
+    APP_ENV: "prod"
+
+secret:
+  enabled: true
+  data:
+    USERNAME: "prod-user"
+    PASSWORD: "prod-password"
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: reusable-app.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
