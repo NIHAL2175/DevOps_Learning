@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: production-alb
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /api/*
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 80
+
+      - path: /admin/*
+        pathType: Prefix
+        backend:
+          service:
+            name: admin-service
+            port:
+              number: 80
+
+      - path: /dashboard/*
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-service
+            port:
+              number: 80
