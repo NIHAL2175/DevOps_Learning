@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-app
+spec:
+  containers:
+  - name: customer-app
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "Starting customer application..."
+        echo "Connecting to DynamoDB..."
+        echo "AccessDeniedException: Unable to locate IAM credentials"
+        exit 1

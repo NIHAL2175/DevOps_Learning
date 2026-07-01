@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: customer-app
+spec:
+  serviceAccountName: customer-app-sa
+  containers:
+  - name: customer-app
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command:
+      - sh
+      - -c
+      - |
+        echo "Starting customer application..."
+        echo "Connecting to DynamoDB..."
+        echo "IAM Role assumed successfully"
+        echo "Customer Read Successful"
+        echo "Customer Write Successful"
+        echo "Customer Update Successful"
+        sleep 3600
