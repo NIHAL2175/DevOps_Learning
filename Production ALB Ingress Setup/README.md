@@ -9,7 +9,7 @@
 ![SSL](https://img.shields.io/badge/SSL-HTTPS-green)
 ![Health Checks](https://img.shields.io/badge/Health_Checks-Enabled-brightgreen)
 
-<img src="Architecture/Arch.png" width="100%">
+<img src="Architecture/arch.png" width="100%">
 
 </div>
 
