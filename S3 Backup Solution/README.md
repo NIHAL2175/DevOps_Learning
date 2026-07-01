@@ -338,8 +338,9 @@ aws s3 ls s3://nihal-s3-backup-solution-928974129633 --recursive
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nihal%20N-blue?logo=linkedin)](https://www.linkedin.com/in/nihal-n-cse/)
 
----
 
 ⭐ If this project helped you understand **AWS Backup & Disaster Recovery using Amazon S3**, consider giving this repository a **⭐**.
 
 </div>
+
+---
