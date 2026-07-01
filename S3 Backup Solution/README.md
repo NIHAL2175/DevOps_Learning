@@ -3,7 +3,6 @@
 # ☁️ AWS S3 Backup & Disaster Recovery Solution
 
 ![AWS](https://img.shields.io/badge/AWS-S3-orange)
-![Amazon S3](https://img.shields.io/badge/Amazon-S3-red)
 ![AWS CLI](https://img.shields.io/badge/AWS%20CLI-Automation-blue)
 ![Backup](https://img.shields.io/badge/Backup-Disaster%20Recovery-green)
 ![DevOps](https://img.shields.io/badge/DevOps-Automation-blueviolet)
