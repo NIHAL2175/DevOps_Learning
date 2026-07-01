@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 DynamoDB Application Deployment – IRSA Investigation & Resolution
+# 🚀 DynamoDB Application Deployment
 
 ![AWS](https://img.shields.io/badge/AWS-DynamoDB-orange)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-K8s-blue)
