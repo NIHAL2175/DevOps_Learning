@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-app
+spec:
+  containers:
+    - name: demo-app
+      image: busybox
+      command:
+        - sh
+        - -c
+        - |
+          echo "Starting Application..."
+          echo "Reading Kubernetes Secret..."
+          echo "DB_USERNAME=$DB_USERNAME"
+          echo "Application Started Successfully"
+          sleep 3600
+      env:
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_USERNAME

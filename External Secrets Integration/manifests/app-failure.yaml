@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-app
+spec:
+  containers:
+  - name: demo-app
+    image: busybox
+    command:
+      - sh
+      - -c
+      - |
+        echo "Starting Application..."
+        echo "Reading Kubernetes Secret..."
+        if [ -z "$DB_USERNAME" ]; then
+          echo "ERROR: DB_USERNAME not found"
+          exit 1
+        fi
+        sleep 3600
+    env:
+    - name: DB_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: DB_USERNAME
